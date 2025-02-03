@@ -1,0 +1,23 @@
+## navbar - stiky to screen
+- Company logo
+- Services
+- About
+- Portfolio/Blog
+- languages: Estonian, English, Finish, Russian
+
+## Content
+- Hero
+- Why to choose us (Use a few pitures and explanation text and design it)
+- Pictures of maded work
+- Pricing/
+- (Future) contact us 
+
+## Footer
+- Copyright Notice
+- Company logo
+- Social Media Icons
+- Contact information
+	* Company Address
+	* Phone
+	* Email
+- Simple site map
