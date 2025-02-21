@@ -3,71 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fimarek Oy – строительные услуги в регионе Уусимаа: раудоитус, бетонные и плотницкие работы с высоким качеством">
+    <meta name="keywords" content="Fimarek Oy, строительные услуги, Уусимаа, раудоитус, бетон, плотницкие работы">
+    <meta name="author" content="Fimarek Oy">
     <title>Fimarek Oy – Demosivu</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffffff; /* Основной белый */
+            --secondary: #000000; /* Вторичный черный */
+            --accent: #104375; /* Синий акцент */
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #104375;
+            border-color: #104375;
+        }
+
+        .badge-primary {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .text-primary {
+            color: var(--accent);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+    </style>
 </head>
+
 <body class="font-sans antialiased">
 
-    <!-- Language Switcher -->
-    <div class="fixed top-4 right-4 z-50">
-        <select id="language-select" class="select select-bordered select-sm">
-            <option value="fi">FI</option>
-            <option value="en">EN</option>
-            <option value="ru">RU</option>
-            <option value="et">ET</option>
-        </select>
-    </div>
-
     <!-- Header -->
-    <header class="navbar bg-base-100 shadow-lg">
+    <header class="navbar bg-white shadow-lg fixed top-0 w-full z-40" role="banner" aria-label="Main navigation">
         <div class="navbar-start">
             <div class="dropdown">
-                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                <label tabindex="0" class="btn btn-ghost lg:hidden" aria-label="Open mobile menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </label>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a href="#" data-lang="home" class="active">Etusivu</a></li>
-                    <li><a href="#" data-lang="services">Palvelut</a></li>
-                    <li><a href="#" data-lang="references">Referenssit</a></li>
-                    <li><a href="#" data-lang="contacts">Yhteystiedot</a></li>
-                    <li><a href="#" data-lang="quote">Tarjouspyyntö</a></li>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52 z-50" role="menu" aria-label="Mobile navigation menu">
+                    <li><a href="#home" data-lang="home" class="active" aria-label="Home">Etusivu</a></li>
+                    <li><a href="#services" data-lang="services" aria-label="Services">Palvelut</a></li>
+                    <li><a href="#gallery" data-lang="references" aria-label="References">Referenssit</a></li>
+                    <li><a href="#contact" data-lang="contacts" aria-label="Contacts">Yhteystiedot</a></li>
+                    <li><a href="#quote" data-lang="quote" class="modal-trigger" aria-label="Request a Quote">Tarjouspyyntö</a></li>
                 </ul>
             </div>
-            <a href="#" class="btn btn-ghost normal-case text-xl">
-                <img src="logo-placeholder.png" alt="Fimarek Oy" class="h-10">
+            <a href="#home" class="btn btn-ghost normal-case text-xl" aria-label="Fimarek Oy Homepage">
+                <img src="logo-placeholder.png" alt="Fimarek Oy Logo" class="h-10" loading="eager">
             </a>
         </div>
         <div class="navbar-end hidden lg:flex">
-            <ul class="menu menu-horizontal px-1">
-                <li><a href="#" data-lang="home" class="active">Etusivu</a></li>
-                <li><a href="#" data-lang="services">Palvelut</a></li>
-                <li><a href="#" data-lang="references">Referenssit</a></li>
-                <li><a href="#" data-lang="contacts">Yhteystiedot</a></li>
-                <li><a href="#" data-lang="quote">Tarjouspyyntö</a></li>
+            <ul class="menu menu-horizontal px-1" role="navigation" aria-label="Desktop navigation menu">
+                <li><a href="#home" data-lang="home" class="active" aria-label="Home">Etusivu</a></li>
+                <li><a href="#services" data-lang="services" aria-label="Services">Palvelut</a></li>
+                <li><a href="#gallery" data-lang="references" aria-label="References">Referenssit</a></li>
+                <li><a href="#contact" data-lang="contacts" aria-label="Contacts">Yhteystiedot</a></li>
+                <li><a href="#quote" data-lang="quote" class="modal-trigger" aria-label="Request a Quote">Tarjouspyyntö</a></li>
             </ul>
+        </div>
+        <!-- Language Switcher (remains as <select>) -->
+        <div class="fixed top-4 right-4 z-50">
+            <select id="language-select" class="select select-bordered select-sm bg-white text-black border-black" aria-label="Select language">
+                <option value="fi">FI</option>
+                <option value="en">EN</option>
+                <option value="ru">RU</option>
+                <option value="et">ET</option>
+            </select>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero min-h-[70vh] bg-gray-100" style="background-image: url('background-image.jpg');">
+    <!-- Hero Section (Home) -->
+    <section id="home" class="hero min-h-[70vh] bg-white relative" aria-label="Hero Section">
         <div class="hero-overlay bg-opacity-60"></div>
-        <div class="hero-content text-center text-neutral-content">
+        <div class="hero-content text-center text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div class="max-w-2xl">
-                <h1 class="mb-5 text-5xl font-bold text-white">Fimarek Oy</h1>
+                <h1 class="mb-5 text-5xl font-bold">Fimarek Oy</h1>
                 <p class="mb-5 text-xl" data-lang="hero-text">Vankkaa osaamista raudoituksesta betonitöihin – laadukkaat rakennuspalvelut Uudenmaan alueella.</p>
                 <div class="flex justify-center gap-4">
-                    <a href="#" class="btn btn-primary" data-lang="services">Palvelut</a>
-                    <a href="#" class="btn btn-outline btn-primary" data-lang="contacts">Yhteystiedot</a>
+                    <a href="#services" class="btn btn-primary" data-lang="services" aria-label="Services Section">Palvelut</a>
+                    <a href="#contact" class="btn btn-outline border-white text-white hover:bg-accent hover:border-accent" data-lang="contacts" aria-label="Contact Section">Yhteystiedot</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="py-16 px-4 bg-white">
+    <section id="about" class="py-16 px-4 bg-white" aria-label="About Section">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row gap-8 items-center">
                 <div class="md:w-1/2">
@@ -77,7 +117,7 @@
                     <p data-lang="about-text2">Yrityksemme perusta on vankka osaaminen ja sitoutuminen korkeaan laatuun. Jokainen projektimme on meille tärkeä.</p>
                 </div>
                 <div class="md:w-1/2">
-                    <div class="card bg-base-100 shadow-xl">
+                    <div class="card bg-white shadow-xl border border-black hover:shadow-lg">
                         <div class="card-body">
                             <h3 class="card-title text-2xl" data-lang="since">Vuodesta 2021</h3>
                         </div>
@@ -88,91 +128,124 @@
     </section>
 
     <!-- Services Section -->
-    <section class="py-16 px-4 bg-base-200">
+    <section id="services" class="py-16 px-4 bg-gray-100" aria-label="Services Section">
         <div class="container mx-auto text-center">
             <h2 class="text-3xl font-bold mb-12" data-lang="services">Palvelut</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="card bg-base-100 shadow-xl">
+                <div class="card bg-white shadow-xl border border-black hover:shadow-lg">
                     <div class="card-body items-center text-center">
-                        <i class="fas fa-helmet-safety text-4xl mb-4 text-primary"></i>
+                        <i class="fas fa-helmet-safety text-4xl mb-4 text-accent"></i>
                         <h3 class="card-title" data-lang="reinforcement">Raudoitustyöt</h3>
                     </div>
                 </div>
-                <div class="card bg-base-100 shadow-xl">
+                <div class="card bg-white shadow-xl border border-black hover:shadow-lg">
                     <div class="card-body items-center text-center">
-                        <i class="fas fa-building text-4xl mb-4 text-primary"></i>
+                        <i class="fas fa-building text-4xl mb-4 text-accent"></i>
                         <h3 class="card-title" data-lang="concrete">Betonityöt</h3>
                     </div>
                 </div>
-                <div class="card bg-base-100 shadow-xl">
+                <div class="card bg-white shadow-xl border border-black hover:shadow-lg">
                     <div class="card-body items-center text-center">
-                        <i class="fas fa-tools text-4xl mb-4 text-primary"></i>
+                        <i class="fas fa-tools text-4xl mb-4 text-accent"></i>
                         <h3 class="card-title" data-lang="carpentry">Timpurityöt</h3>
                     </div>
                 </div>
-                <div class="card bg-base-100 shadow-xl">
+                <div class="card bg-white shadow-xl border border-black hover:shadow-lg">
                     <div class="card-body items-center text-center">
-                        <i class="fas fa-hard-hat text-4xl mb-4 text-primary"></i>
+                        <i class="fas fa-hard-hat text-4xl mb-4 text-accent"></i>
                         <h3 class="card-title" data-lang="general">Yleisrakennustyöt</h3>
                     </div>
                 </div>
             </div>
-            <a href="#" class="btn btn-primary mt-8" data-lang="services-more">Lue lisää palveluistamme!</a>
+            <a href="#services" class="btn btn-primary mt-8" data-lang="services-more" aria-label="More Services">Lue lisää palveluistamme!</a>
         </div>
     </section>
 
     <!-- Gallery Section -->
-    <section class="py-16 px-4">
+    <section id="gallery" class="py-16 px-4 bg-white" aria-label="Gallery Section">
         <div class="container mx-auto text-center">
             <span class="badge badge-primary mb-2" data-lang="pictures">Kuvia</span>
             <h2 class="text-3xl font-bold mb-12" data-lang="gallery-title">Työn tekoa ja valmiita projekteja</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <img src="concrete-pouring.jpg" alt="Concrete pouring" class="rounded-lg shadow-lg">
-                <img src="modern-house.jpg" alt="Modern house" class="rounded-lg shadow-lg">
-                <img src="house-facade.jpg" alt="House facade" class="rounded-lg shadow-lg">
+                <img src="concrete-pouring.jpg" alt="Concrete pouring" class="rounded-lg shadow-lg border border-black" loading="lazy">
+                <img src="modern-house.jpg" alt="Modern house" class="rounded-lg shadow-lg border border-black" loading="lazy">
+                <img src="house-facade.jpg" alt="House facade" class="rounded-lg shadow-lg border border-black" loading="lazy">
             </div>
-            <a href="#" class="btn btn-primary mt-8" data-lang="references">Katso referenssimme</a>
+            <a href="#gallery" class="btn btn-primary mt-8" data-lang="references" aria-label="View References">Katso referenssimme</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-4 bg-gray-100" aria-label="Contact Section">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-12" data-lang="contacts">Yhteystiedot</h2>
+            <div class="flex flex-col gap-4">
+                <span><i class="fas fa-map-marker-alt text-accent"></i> Vantaa, Uusimaa</span>
+                <span><i class="fas fa-phone text-accent"></i> 050 502 6303</span>
+                <span><i class="fas fa-envelope text-accent"></i> [email protected]</span>
+            </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 px-4 bg-primary text-white text-center">
+    <section id="quote" class="py-16 px-4 bg-accent text-white text-center" aria-label="Call to Action">
         <div class="container mx-auto">
             <h2 class="text-3xl font-bold mb-4" data-lang="cta-title">Projekti mielessä?</h2>
             <p class="text-xl mb-6" data-lang="cta-text">Pyydä tarjous tänään, rakennetaan unelmasi yhdessä!</p>
-            <a href="#" class="btn btn-secondary" data-lang="quote">Tarjouspyyntöön</a>
+            <a href="#quote" class="btn btn-white modal-trigger" data-lang="quote" aria-label="Request a Quote">Tarjouspyyntöön</a>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer footer-center p-10 bg-base-300 text-base-content">
-        <div>
-            <img src="logo-placeholder.png" alt="Fimarek Oy" class="h-12 mb-4">
-            <p data-lang="footer-text">Fimarek Oy – Rakennusalan Asiantuntija Uudenmaan Alueella</p>
-            <div class="grid grid-flow-col gap-4">
-                <a href="#" class="link link-hover" data-lang="home">Etusivu</a>
-                <a href="#" class="link link-hover" data-lang="services">Palvelut</a>
-                <a href="#" class="link link-hover" data-lang="references">Referenssit</a>
-                <a href="#" class="link link-hover" data-lang="contacts">Yhteystiedot</a>
-                <a href="#" class="link link-hover" data-lang="quote">Tarjouspyyntö</a>
-            </div>
-            <div class="flex gap-4 mt-4">
-                <span><i class="fas fa-map-marker-alt"></i> Vantaa, Uusimaa</span>
-                <span><i class="fas fa-phone"></i> 050 502 6303</span>
-                <span><i class="fas fa-envelope"></i> [email protected]</span>
-            </div>
-            <div class="mt-4">
-                <div class="flex gap-4">
-                    <a href="#" class="btn btn-circle btn-ghost"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="btn btn-circle btn-ghost"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="btn btn-circle btn-ghost"><i class="fab fa-twitter"></i></a>
+    <!-- Modal -->
+    <div class="modal" id="contact-modal" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-box bg-white text-black">
+            <h3 class="font-bold text-lg" id="modal-title" data-lang="quote">Tarjouspyyntö</h3>
+            <p class="py-4">Ota meihin yhteyttä saadaksesi tarjouksen:</p>
+            <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-phone"></i>
+                    <span id="phone-number">050 502 6303</span>
+                    <button class="btn btn-sm btn-outline" onclick="copyToClipboard('phone-number')" aria-label="Copy phone number">Kopioi</button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-envelope"></i>
+                    <span id="email-address">[email protected]</span>
+                    <button class="btn btn-sm btn-outline" onclick="copyToClipboard('email-address')" aria-label="Copy email address">Kopioi</button>
                 </div>
             </div>
-            <p class="mt-4">© 2024 WebFin Demo All rights reserved.</p>
+            <div class="modal-action">
+                <label for="contact-modal" class="btn" aria-label="Close modal">Sulje</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-gray-100 text-black" role="contentinfo" aria-label="Footer">
+        <div class="flex flex-col items-center gap-4 md:flex-row md:justify-center">
+            <img src="logo-placeholder.png" alt="Fimarek Oy Logo" class="h-12 mb-4 md:mb-0" loading="eager">
+            <p data-lang="footer-text" class="mb-4 md:mb-0">Fimarek Oy – Rakennusalan Asiantuntija Uudenmaan Alueella</p>
+            <div class="grid grid-flow-col gap-4 flex-wrap justify-center">
+                <a href="#home" class="link link-hover" data-lang="home" aria-label="Home">Etusivu</a>
+                <a href="#services" class="link link-hover" data-lang="services" aria-label="Services">Palvelut</a>
+                <a href="#gallery" class="link link-hover" data-lang="references" aria-label="References">Referenssit</a>
+                <a href="#contact" class="link link-hover" data-lang="contacts" aria-label="Contacts">Yhteystiedot</a>
+                <a href="#quote" class="link link-hover modal-trigger" data-lang="quote" aria-label="Request a Quote">Tarjouspyyntö</a>
+            </div>
+            <div class="flex flex-col gap-4 mt-4 md:mt-0 md:flex-row">
+                <span><i class="fas fa-map-marker-alt text-accent"></i> Vantaa, Uusimaa</span>
+                <span><i class="fas fa-phone text-accent"></i> 050 502 6303</span>
+                <span><i class="fas fa-envelope text-accent"></i> [email protected]</span>
+            </div>
+            <div class="mt-4 flex gap-4">
+                <a href="#" class="btn btn-circle btn-ghost" aria-label="Instagram"><i class="fab fa-instagram text-accent"></i></a>
+                <a href="#" class="btn btn-circle btn-ghost" aria-label="Facebook"><i class="fab fa-facebook text-accent"></i></a>
+                <a href="#" class="btn btn-circle btn-ghost" aria-label="Twitter"><i class="fab fa-twitter text-accent"></i></a>
+            </div>
+            <p class="mt-4">© 2025 All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous" defer></script>
     <script>
         // Объект с переводами
         const translations = {
@@ -182,10 +255,10 @@
                 references: "Referenssit",
                 contacts: "Yhteystiedot",
                 quote: "Tarjouspyyntö",
-                "hero-text": "Vankkaa osaamista raudoituksesta betonitöihin – laadukkaat rakennuspalvelut Uudenmaan alueella.",
+                "hero-text": "Vankkaa osaamista raudoituksesta betonitöihin – laadukkaат rakennuspalvelut Uudenmaan alueella.",
                 about: "Meistä",
                 "about-title": "Rakennusalan asiantuntija Uudenmaan alueella",
-                "about-text1": "Fimarek Oy on Vantaalla sijaitseva, luotettava ja kokenut rakennusalan yritys, joka palvelee asiakkaita ympäri Uuttamaata.",
+                "about-text1": "Fimarek Oy on Vantaalla sijaitseva, luотettava ja kokenut rakennusalan yritys, joka palvelee asiakkaita ympäri Uuttamaata.",
                 "about-text2": "Yrityksemme perusta on vankka osaaminen ja sitoutuminen korkeaan laatuun. Jokainen projektimme on meille tärkeä.",
                 since: "Vuodesta 2021",
                 reinforcement: "Raudoitustyöt",
@@ -194,7 +267,7 @@
                 general: "Yleisrakennustyöt",
                 "services-more": "Lue lisää palveluistamme!",
                 pictures: "Kuvia",
-                "gallery-title": "Työn tekoa ja valmiita projekteja",
+                "gallery-title": "Työn tekoa ja valмиita projekteja",
                 "cta-title": "Projekti mielessä?",
                 "cta-text": "Pyydä tarjous tänään, rakennetaan unelmasi yhdessä!",
                 "footer-text": "Fimarek Oy – Rakennusalan Asiantuntija Uudenmaan Alueella"
@@ -265,7 +338,7 @@
                 pictures: "Pildid",
                 "gallery-title": "Tööprotsess ja valmis projektid",
                 "cta-title": "Kas sul on projekt mõttes?",
-                "cta-text": "Küsi pakkumist juba täna, ehitame sinu unistused koos!",
+                "cta-text": "Küsi pakkumist juba täна, ehitame sinu unistused koos!",
                 "footer-text": "Fimarek Oy – Ehitusvaldkonna ekspert Uusimaa piirkonnas"
             }
         };
@@ -278,20 +351,71 @@
                     element.textContent = translations[lang][key];
                 }
             });
-            document.documentElement.lang = lang; // Обновляем атрибут lang документа
+            document.documentElement.lang = lang;
         }
 
         // Слушатель события для переключателя языка
         document.getElementById('language-select').addEventListener('change', (e) => {
             const selectedLang = e.target.value;
             updateLanguage(selectedLang);
-            localStorage.setItem('language', selectedLang); // Сохраняем выбор пользователя
+            localStorage.setItem('language', selectedLang);
         });
 
-        // Устанавливаем начальный язык (по умолчанию финский или сохраненный)
+        // Устанавливаем начальный язык
         const savedLang = localStorage.getItem('language') || 'fi';
         document.getElementById('language-select').value = savedLang;
         updateLanguage(savedLang);
+
+        // Прокрутка к секциям
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (this.classList.contains('modal-trigger')) {
+                    const modal = document.getElementById('contact-modal');
+                    modal.classList.add('modal-open');
+                } else {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Модальное окно
+        const modalTriggers = document.querySelectorAll('.modal-trigger');
+        const modal = document.getElementById('contact-modal');
+        modalTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.add('modal-open');
+            });
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('modal-open');
+            }
+        });
+
+        // Копирование в буфер обмена с обработкой ошибок
+        function copyToClipboard(elementId) {
+            try {
+                const text = document.getElementById(elementId).textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Скопировано: ' + text);
+                }).catch(err => {
+                    console.error('Ошибка копирования:', err);
+                    alert('Не удалось скопировать текст. Пожалуйста, попробуйте вручную.');
+                });
+            } catch (error) {
+                console.error('Ошибка доступа к буферу обмена:', error);
+                alert('Ваш браузер не поддерживает копирование в буфер. Пожалуйста, скопируйте вручную.');
+            }
+        }
     </script>
 </body>
 </html>
