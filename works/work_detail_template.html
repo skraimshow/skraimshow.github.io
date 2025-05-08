@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Название Работы - Портфолио</title> <!-- CHANGE THIS TITLE -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- PrismJS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+</head>
+<body class="bg-slate-100">
+
+    <header class="bg-blue-700 text-white p-6 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold animate-on-scroll">11_1_11_20 - Название Работы</h1> <!-- CHANGE THIS -->
+            <a href="../index.html" class="bg-white text-blue-700 hover:bg-blue-100 font-semibold py-2 px-4 rounded-lg transition-colors duration-300 animate-on-scroll fade-in-delay-1">
+                ← На главную
+            </a>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-6">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl mb-8 animate-on-scroll fade-in-delay-1">
+            <h2 class="text-2xl font-semibold text-blue-800 mb-1">Artjom Toht TA-21V</h2> <!-- Your name -->
+             <hr class="my-4 border-slate-300">
+            <div class="grid md:grid-cols-2 gap-6 mt-4">
+                <div class="border border-slate-300 p-4 rounded-lg shadow-sm bg-slate-50 animate-on-scroll fade-in-delay-2">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Цель задания</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        <!-- ADD GOAL DESCRIPTION HERE -->
+                        Разработать интерактивную HTML страницу, демонстрирующую симуляцию поведения муравьев.
+                    </p>
+                </div>
+                <div class="border border-slate-300 p-4 rounded-lg shadow-sm bg-slate-50 animate-on-scroll fade-in-delay-3">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Описание задания</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        <!-- ADD TASK DESCRIPTION HERE -->
+                        Страница должна включать визуализацию муравейника, отображение движения муравьев,
+                        и возможность взаимодействия с пользователем, если применимо.
+                        Технологии: HTML, CSS, JavaScript.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl mb-8 animate-on-scroll fade-in-delay-2">
+            <h2 class="text-2xl font-semibold text-blue-800 mb-4">Выполненное Задание</h2>
+            <div class="border border-slate-300 rounded-lg overflow-hidden shadow-lg">
+                <iframe id="programFrame"
+                        class="w-full h-[600px]"
+                        src="../assets/iframe_content/YOUR_PROGRAM_FILE.html"  
+                        title="Просмотр задания">
+                        <!-- CHANGE src to your actual program file -->
+                </iframe>
+            </div>
+            <button onclick="openIframeInNewTab('programFrame')"
+                    class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Открыть в новой вкладке
+            </button>
+        </div>
+
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl animate-on-scroll fade-in-delay-3">
+            <h2 class="text-2xl font-semibold text-blue-800 mb-4">Код Программы</h2>
+            <!--
+                For language classes with Prism.js:
+                - HTML: language-markup
+                - CSS: language-css
+                - JavaScript: language-javascript
+                - Python: language-python
+                - C++: language-cpp
+                - Java: language-java
+                - PHP: language-php
+                etc.
+                Autoloader will try to detect, but explicitly setting it is best.
+            -->
+            <pre><code class="language-html">
+<!-- ADD YOUR CODE SNIPPET HERE -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Пример</title>
+</head>
+<body>
+    <h1>Это заголовок!</h1>
+    <script>
+        console.log('Hello from the iframe!');
+    </script>
+</body>
+</html>
+            </code></pre>
+        </div>
+    </div>
+
+    <footer class="text-center p-6 mt-10 text-slate-600 text-sm animate-on-scroll">
+        <p>© 2023 Artjom Toht. Все права защищены.</p>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    <!-- PrismJS Core and Autoloader (make sure paths are correct if not using CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        // Ensure Prism highlights after content is loaded, if not already handled by autoloader timing
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Check if Prism is loaded and then highlight
+             if (window.Prism) {
+                 Prism.highlightAll();
+             }
+        });
+    </script>
+</body>
+</html>

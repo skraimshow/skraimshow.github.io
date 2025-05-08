@@ -1,0 +1,34 @@
+<!-- ... inside work1.html ... -->
+<pre><code class="language-html">
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Anthill Simulation</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f0f0f0; }
+                        .container { text-align: center; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+                        h1 { color: #333; }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>Симуляция Муравейника</h1>
+                        <p>Здесь будет ваша интерактивная симуляция.</p>
+                        <canvas id="anthillCanvas" width="500" height="300" style="border:1px solid #ccc; margin-top:15px;"></canvas>
+                        <script>
+                            const canvas = document.getElementById('anthillCanvas');
+                            const ctx = canvas.getContext('2d');
+                            ctx.fillStyle = '#6A4C29'; // Brown color for ground
+                            ctx.fillRect(0, 200, canvas.width, 100);
+                            ctx.fillStyle = '#87CEEB'; // Sky blue
+                            ctx.fillRect(0, 0, canvas.width, 200);
+                            ctx.fillStyle = 'black';
+                            ctx.fillText("Простая заглушка для муравейника", 150, 150);
+                            // Add your actual anthill simulation JS here
+                        </script>
+                    </div>
+                </body>
+                </html>
+                            </code></pre>
+<!-- ... -->

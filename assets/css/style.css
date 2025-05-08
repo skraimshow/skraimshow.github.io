@@ -1,0 +1,45 @@
+/* assets/css/style.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    @apply bg-slate-100 text-slate-800; /* Tailwind classes for base styling */
+}
+
+/* Basic fade-in animation for elements */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInAnimation 0.5s ease-out forwards;
+}
+
+@keyframes fadeInAnimation {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add some delay for staggered animations if needed */
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+/* ... and so on */
+
+/* Custom blue accent for active states or special elements if needed */
+.custom-blue-accent {
+    @apply text-blue-600;
+}
+
+.card-hover-effect {
+    @apply transition-all duration-300 ease-in-out;
+}
+
+.card-hover-effect:hover {
+    @apply shadow-2xl transform -translate-y-1;
+}
+
+/* Styling for the code block similar to report.html but with Tailwind */
+pre[class*="language-"] {
+    @apply p-4 rounded-lg shadow-md my-4 text-sm leading-relaxed;
+    border: 1px solid theme('colors.slate.700'); /* Use Tailwind theme for border */
+    box-shadow: 5px 10px theme('colors.slate.900/50'); /* Softer shadow */
+}
