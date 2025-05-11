@@ -1,83 +1,208 @@
-<!DOCTYPE html>
-<html lang="ru">
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио Работ</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Random Joke</title>
     <style>
-        /* Specific gradient for the hero section of the index page */
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(270deg, #ff6b6b, #4ecdc4, #45b7d1, #f9d56e, #ff9f1c);
+            background-size: 600% 600%;
+            animation: gradientAnimation 10s ease infinite;
+            text-align: center;
+            padding: 20px;
+            color: #333;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        #jokeContainer {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+        }
+        #jokeContainer.loaded {
+            opacity: 1;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        button:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+        @media (max-width: 600px) {
+            #jokeContainer {
+                padding: 15px;
+                font-size: 14px;
+            }
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-100">
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div id="jokeContainer">Click the button to get a joke!</div>
+    <button id="loadButton">Get a Joke</button>
+    <script>
+        const jokeElement = document.getElementById('jokeContainer');
+        const loadButton = document.getElementById('loadButton');
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
 
-    <header class="hero-gradient text-white p-8 shadow-lg animate-on-scroll">
-        <div class="container mx-auto">
-            <h1 class="text-4xl font-bold">Мои Выполненные Работы</h1>
-            <p class="mt-2 text-lg">Список проектов и заданий.</p>
-        </div>
-    </header>
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-    <main class="container mx-auto p-6">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        let particles = [];
+        const particleCount = 50;
 
-            <!-- Work Card 1 -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover-effect animate-on-scroll fade-in-delay-1">
-                <img src="https://picsum.photos/seed/work1/600/400" alt="Предварительный просмотр работы 1" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-blue-700 mb-2">Симуляция Муравейника</h2>
-                    <p class="text-slate-600 mb-4 text-sm">
-                        Интерактивная HTML5 симуляция жизни муравейника.
-                    </p>
-                    <a href="works/work1.html"
-                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
-                        Подробнее
-                    </a>
-                </div>
-            </div>
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+            }
+            update(mouseX, mouseY) {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
 
-            <!-- Work Card 2 -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover-effect animate-on-scroll fade-in-delay-2">
-                <img src="https://picsum.photos/seed/work2/600/400" alt="Предварительный просмотр работы 2" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-blue-700 mb-2">Анализ Текстовых Данных</h2>
-                    <p class="text-slate-600 mb-4 text-sm">
-                        Простой скрипт для анализа и отображения текстового файла.
-                    </p>
-                    <a href="works/work2.html"
-                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
-                        Подробнее
-                    </a>
-                </div>
-            </div>
+                const dx = this.x - mouseX;
+                const dy = this.y - mouseY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    this.x += dx * 0.02;
+                    this.y += dy * 0.02;
+                }
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
 
-            <!-- Add more work cards here following the pattern -->
-             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover-effect animate-on-scroll fade-in-delay-3">
-                <img src="https://picsum.photos/seed/work3/600/400" alt="Предварительный просмотр работы 3" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-blue-700 mb-2">Рандомные Шутки (Chuck Norris)</h2>
-                    <p class="text-slate-600 mb-4 text-sm">
-                        Пример красивой одностраничной HTML страницы с API интеграцией.
-                    </p>
-                    <a href="works/work3_chuck_norris.html"
-                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
-                        Подробнее
-                    </a>
-                </div>
-            </div>
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
 
+        let mouseX = 0;
+        let mouseY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.x;
+            mouseY = e.y;
+        });
 
-        </div>
-    </main>
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let particle of particles) {
+                particle.update(mouseX, mouseY);
+                particle.draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
 
-    <footer class="text-center p-6 mt-10 text-slate-600 text-sm animate-on-scroll">
-        <p>© 2023 Artjom Toht. Все права защищены.</p>
-    </footer>
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
 
-    <script src="assets/js/script.js"></script>
+        function loadRandomJoke() {
+            jokeElement.classList.remove('loaded');
+            jokeElement.textContent = 'Loading joke...';
+
+            fetch('https://api.chucknorris.io/jokes/random')
+                .then(response => response.json())
+                .then(data => {
+                    jokeElement.textContent = data.value;
+                    jokeElement.classList.add('loaded');
+                })
+                .catch(error => {
+                    jokeElement.textContent = 'Oops, something went wrong!';
+                    jokeElement.classList.add('loaded');
+                });
+        }
+
+        loadButton.addEventListener('click', loadRandomJoke);
+    </script>
 </body>
 </html>
