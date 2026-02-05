@@ -1,208 +1,138 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Joke</title>
-    <style>
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(270deg, #ff6b6b, #4ecdc4, #45b7d1, #f9d56e, #ff9f1c);
-            background-size: 600% 600%;
-            animation: gradientAnimation 10s ease infinite;
-            text-align: center;
-            padding: 20px;
-            color: #333;
-            margin: 0;
-            overflow: hidden;
-            position: relative;
-        }
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-        #jokeContainer {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.85);
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease-in-out;
-            opacity: 0;
-            position: relative;
-            z-index: 1;
-        }
-        #jokeContainer.loaded {
-            opacity: 1;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #ff4444;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            position: relative;
-            z-index: 1;
-        }
-        button:hover {
-            background-color: #cc0000;
-            transform: scale(1.05);
-        }
-        @media (max-width: 600px) {
-            #jokeContainer {
-                padding: 15px;
-                font-size: 14px;
-            }
-            button {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-        }
-    </style>
+    <title>Fimarek Oy | Rakennusalan Asiantuntija</title>
+    
+    <!-- Google Fonts: Inter для индустриального стиля -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Библиотеки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
+<script src="js/main.js"></script>
 <body>
-    <canvas id="particleCanvas"></canvas>
-    <div id="jokeContainer">Click the button to get a joke!</div>
-    <button id="loadButton">Get a Joke</button>
-    <script>
-        const jokeElement = document.getElementById('jokeContainer');
-        const loadButton = document.getElementById('loadButton');
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    <!-- Шапка подгружается сюда динамически -->
+    <div id="header-placeholder"></div>
 
-        let particles = [];
-        const particleCount = 50;
+    <!-- HERO SECTION С ВИДЕО -->
+    <section class="hero-fullscreen">
+        <div class="video-container">
+            <!-- Видео запуск: обязательны muted и playsinline -->
+            <video autoplay muted loop playsinline id="bg-video" poster="materials/poster.jpg">
+                <source src="materials/video/fimarektest.mp4" type="video/mp4">
+            </video>
+            <!-- Двойной оверлей: шум + градиент для глубины -->
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="container hero-content-wrapper">
+            <div class="row">
+                <div class="ten columns">
+                    <div class="reveal-text">
+                        <span class="badge-outline" data-lang="since">Vuodesta 2021</span>
+                        <h1 class="hero-title-large">
+                            Fimarek <span class="accent-text" data-lang="hero_name">Oy</span>
+                        </h1>
+                        <p class="hero-lead" data-lang="hero-text">
+                            Vankkaa osaamista raudoituksesta betonitöihin – laadukkaat rakennuspalvelut Uudenmaan alueella.
+                        </p>
+                        <div class="hero-btns">
+                            <a href="connect.html" class="pure-button btn-main" data-lang="quote">Pyydä tarjous</a>
+                            <a href="#services" class="pure-button btn-ghost" data-lang="services">Palvelumme</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 1;
-                this.speedX = Math.random() * 2 - 1;
-                this.speedY = Math.random() * 2 - 1;
-            }
-            update(mouseX, mouseY) {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        <!-- Индикатор скролла -->
+        <div class="scroll-down">
+            <div class="mouse"></div>
+            <span data-lang="scroll">Scroll</span>
+        </div>
+    </section>
 
-                const dx = this.x - mouseX;
-                const dy = this.y - mouseY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 100) {
-                    this.x += dx * 0.02;
-                    this.y += dy * 0.02;
-                }
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+    <!-- SECTION: О НАС (Визуал из "New Version") -->
+    <section class="section-padding about-split">
+        <div class="container">
+            <div class="row flex-align-center">
+                <div class="six columns about-text-block">
+                    <div class="line-decorator"></div>
+                    <h2 class="h1-style" data-lang="about-title">Rakennusalan asiantuntija Uudenmaan alueella</h2>
+                    <p class="p-lead" data-lang="about-text1">Fimarek Oy on Vantaalla sijaitseva, luotettava ja kokenut rakennusalan yritys, joka palvelee asiakkaita ympäri Uuttamaata.</p>
+                    <div class="industrial-quote">
+                        <p data-lang="about-text2">"Yrityksemme perusta on vankka osaaminen ja sitoutuminen korkeaan laatuun."</p>
+                    </div>
+                </div>
+                <div class="six columns">
+                    <div class="image-composite">
+                        <div class="main-image" style="background-image: url('images/20230928_121604.jpg');"></div>
+                        <div class="floating-experience">
+                            <span class="exp-number">3+</span>
+                            <span class="exp-text" data-lang="since-years">Vuotta kokemusta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
+    <!-- SECTION: SERVICES (Dark Industrial Grid) -->
+    <section class="section-padding bg-black" id="services">
+        <div class="container">
+            <div class="text-center section-header">
+                <h6 class="text-blue tracking-widest" data-lang="services">PALVELUT</h6>
+                <h2 class="white-text" data-lang="services-title">Mitä tarjoamme</h2>
+            </div>
+            
+            <div class="row services-v2">
+                <div class="three columns">
+                    <div class="card-v2">
+                        <div class="card-num">01</div>
+                        <i class="fa-solid fa-layer-group"></i>
+                        <h4 data-lang="reinforcement">Raudoitus</h4>
+                        <p data-lang="desc-reinf">Luotettavat и kestävät raudoitustyöt kaikenkokoisiin projekteihin.</p>
+                    </div>
+                </div>
+                <div class="three columns">
+                    <div class="card-v2">
+                        <div class="card-num">02</div>
+                        <i class="fa-solid fa-fill-drip"></i>
+                        <h4 data-lang="concrete">Betonityöt</h4>
+                        <p data-lang="desc-concrete">Ammattitaitoista betonointia uudisrakentamiseen и ремонттеihin.</p>
+                    </div>
+                </div>
+                <div class="three columns">
+                    <div class="card-v2">
+                        <div class="card-num">03</div>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <h4 data-lang="carpentry">Timpurityöt</h4>
+                        <p data-lang="desc-carpentry">Monipuoliset timpurityöt alusta loppuun – laadukkaasti.</p>
+                    </div>
+                </div>
+                <div class="three columns">
+                    <div class="card-v2">
+                        <div class="card-num">04</div>
+                        <i class="fa-solid fa-helmet-safety"></i>
+                        <h4 data-lang="general">Yleisrakennus</h4>
+                        <p data-lang="desc-general">Kattavat rakennuspalvelut pääkaupunkiseudulla.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        let mouseX = 0;
-        let mouseY = 0;
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.x;
-            mouseY = e.y;
-        });
+    <!-- Подвал -->
+    <div id="footer-placeholder"></div>
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let particle of particles) {
-                particle.update(mouseX, mouseY);
-                particle.draw();
-            }
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        function loadRandomJoke() {
-            jokeElement.classList.remove('loaded');
-            jokeElement.textContent = 'Loading joke...';
-
-            fetch('https://api.chucknorris.io/jokes/random')
-                .then(response => response.json())
-                .then(data => {
-                    jokeElement.textContent = data.value;
-                    jokeElement.classList.add('loaded');
-                })
-                .catch(error => {
-                    jokeElement.textContent = 'Oops, something went wrong!';
-                    jokeElement.classList.add('loaded');
-                });
-        }
-
-        loadButton.addEventListener('click', loadRandomJoke);
-    </script>
+    <!-- Scripts -->
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

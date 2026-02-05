@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fimarek Oy | Kontaktid - Ota yhteyttä</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- Hero страницы -->
+    <section class="page-hero" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/68ee4657f374d79a14c54437_optimized_1140.webp');">
+        <div class="container text-center">
+            <h1 class="hero-title-large" data-lang="contacts">Kontaktid</h1>
+            <div class="accent-line center"></div>
+        </div>
+    </section>
+
+    <!-- Контактная секция -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                
+                <!-- Левая колонка: Инфо -->
+                <div class="five columns contact-info-sidebar">
+                    <h6 class="blue-tag" data-lang="contacts">YHTEYSTIEDOT</h6>
+                    <h2 class="section-heading" data-lang="connect-title">Ota yhteyttä</h2>
+                    <p class="mb-60" data-lang="connect-text">Olemme valmiita vastaamaan kysymyksiisi ja auttamaan projektisi toteutuksessa.</p>
+
+                    <div class="c-detail-item">
+                        <div class="c-detail-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="c-detail-text">
+                            <small data-lang="phone-label">Puhelin</small>
+                            <strong>+372 502 6303</strong>
+                        </div>
+                    </div>
+
+                    <div class="c-detail-item">
+                        <div class="c-detail-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="c-detail-text">
+                            <small data-lang="email-label">Sähköposti</small>
+                            <strong>marek.toht@fimarek.ee</strong>
+                        </div>
+                    </div>
+
+                    <div class="c-detail-item">
+                        <div class="c-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="c-detail-text">
+                            <small data-lang="location-label">Toimialue</small>
+                            <strong>Vantaa, Helsinki, Espoo (Uusimaa)</strong>
+                        </div>
+                    </div>
+
+                    <div class="social-box mt-40">
+                        <a href="https://wa.me/3725026303" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: Форма -->
+                <div class="seven columns">
+                    <div class="contact-form-wrapper">
+                        <form class="pure-form pure-form-stacked contact-form" id="fimarek-contact-form">
+                            <div class="row">
+                                <div class="six columns">
+                                    <label for="name" data-lang="form-name">Nimi</label>
+                                    <input type="text" id="name" class="pure-u-1" placeholder="" required>
+                                </div>
+                                <div class="six columns">
+                                    <label for="phone" data-lang="form-phone">Puhelin</label>
+                                    <input type="tel" id="phone" class="pure-u-1" placeholder="" required>
+                                </div>
+                            </div>
+
+                            <label for="email" data-lang="form-email">Sähköposti</label>
+                            <input type="email" id="email" class="pure-u-1" placeholder="" required>
+
+                            <label for="message" data-lang="form-message">Viesti</label>
+                            <textarea id="message" class="pure-u-1" rows="6" placeholder="" required></textarea>
+
+                            <button type="submit" class="pure-button btn-filled u-full-width" data-lang="form-send">Lähetä viesti</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Карта (заглушка) -->
+    <section class="map-section">
+        <!-- Сюда можно вставить iframe от Google Maps -->
+        <div class="map-placeholder">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <p>Uudenmaan alue, Finland</p>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
