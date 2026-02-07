@@ -107,34 +107,6 @@ body {
     color: var(--black) !important; 
 }
 
-/* Service & Value Cards */
-.card-v2, .value-card, .service-card-v2 {
-    background: #16161d;
-    padding: 50px 30px;
-    border-radius: 4px;
-    position: relative;
-    transition: var(--transition);
-    border: 1px solid #222;
-    height: 100%;
-}
-
-.bg-light .value-card {
-    background: var(--white);
-    border: 1px solid #eee;
-    box-shadow: var(--shadow);
-}
-
-.card-v2:hover, .value-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--blue);
-}
-
-.card-v2 i, .value-card i {
-    font-size: 3.5rem;
-    color: var(--blue);
-    margin-bottom: 25px;
-    display: block;
-}
 
 /* Contact Page Specifics */
 .contact-info-sidebar { padding-right: 30px; }
@@ -319,6 +291,113 @@ body {
 }
 .hero-lead { font-size: 1.8rem; font-weight: 300; max-width: 600px; margin-bottom: 40px; opacity: 0.9; }
 
+/* Industrial Services Section - Optimized */
+.bg-dark-industrial {
+    background-color: #0b0b0f; 
+    padding: 100px 0;
+}
+
+/* Фикс для сетки: заставляем колонки Skeleton быть одной высоты */
+.services-v3.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.service-card-v3 {
+    background: #12121a;
+    border: 1px solid #1e1e26;
+    padding: 30px 20px; /* Уменьшили горизонтальный отступ с 30 до 20 */
+    height: 100%;
+    position: relative;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    
+    /* ФИКС ПЕРЕПОЛНЕНИЯ */
+    overflow: hidden; 
+    word-wrap: break-word; /* Разрывать длинные слова, если не влезают */
+    hyphens: auto;         /* Добавлять дефис при переносе (где возможно) */
+}
+
+.service-card-v3:hover {
+    background: #161621;
+    border-color: var(--blue);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-number {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--blue);
+    opacity: 0.5;
+}
+
+.icon-wrap {
+    font-size: 2.8rem; /* Немного уменьшили иконку */
+    color: var(--white);
+}
+
+.service-card-v3 h4 {
+    color: var(--white);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.7rem; /* Уменьшили заголовок с 2rem до 1.7rem, чтобы влезал */
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.service-card-v3 p {
+    color: #8a8a98;
+    font-size: 1.3rem; /* Чуть уменьшили текст описания */
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.card-footer-line {
+    width: 0; height: 2px;
+    background: var(--blue);
+    position: absolute; bottom: 0; left: 0;
+    transition: var(--transition);
+}
+
+.service-card-v3:hover .card-footer-line { width: 100%; }
+
+/* АДАПТИВНОСТЬ: на планшетах делаем 2 колонки вместо 4 */
+@media (max-width: 1000px) {
+    .services-v3 .three.columns {
+        width: 48%;
+        margin-left: 2%;
+        margin-bottom: 20px;
+    }
+    .services-v3 .three.columns:nth-child(2n+1) {
+        margin-left: 0;
+    }
+}
+
+/* На мобилках - 1 колонка */
+@media (max-width: 550px) {
+    .services-v3 .three.columns {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* Фикс для заголовка секции (чтобы не висел в воздухе) */
+.section-header .section-heading {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
 /* Page Hero (Interior Pages) */
 .page-hero {
     height: 45vh; background-size: cover; background-position: center;
@@ -366,6 +445,7 @@ body {
     
     .footer-top > .columns { margin-bottom: 40px; }
 }
+
 
 /* ==========================================================================
    8. Portfolio page
@@ -429,3 +509,24 @@ body {
 @media (max-width: 768px) {
     .project-card { height: 300px; }
 }
+
+
+
+
+
+
+
+/*  */
+/* Accessibility */
+.visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+/* Улучшение контрастности (PageSpeed ругался) */
+.footer-v2 { color: #cbd5e1; } /* Более светлый серый для черного фона */
+.hero-lead { color: rgba(255,255,255,1); } /* Полная непрозрачность */

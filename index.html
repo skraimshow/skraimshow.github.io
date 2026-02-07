@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html lang="fi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO: Добавлено описание (PageSpeed Fix) -->
+    <meta name="description"
+        content="Fimarek Oy - Ammattitaitoiset raudoitustyöt, betonityöt ja yleisrakennus Uudenmaan alueella. Laatua vuodesta 2021.">
+
     <title>Fimarek Oy | Rakennusalan Asiantuntija</title>
-    
-    <!-- Google Fonts: Inter для индустриального стиля -->
+
+    <!-- Preconnect: Ускоряет подключение к шрифтам (Performance Fix) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- CSS: Добавлен display=swap (Performance Fix) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Библиотеки -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
-<script src="js/main.js"></script>
+
 <body>
 
-    <!-- Шапка подгружается сюда динамически -->
     <div id="header-placeholder"></div>
 
-    <!-- HERO SECTION С ВИДЕО -->
     <section class="hero-fullscreen">
         <div class="video-container">
-            <!-- Видео запуск: обязательны muted и playsinline -->
-            <video autoplay muted loop playsinline id="bg-video" poster="materials/poster.jpg">
+            <!-- Видео: добавлено preload="metadata" -->
+            <video autoplay muted loop playsinline id="bg-video" preload="metadata"
+                alt="materials/images/testimage.jpg">
                 <source src="materials/video/fimarektest.mp4" type="video/mp4">
             </video>
-            <!-- Двойной оверлей: шум + градиент для глубины -->
             <div class="hero-overlay"></div>
         </div>
-        
+
         <div class="container hero-content-wrapper">
             <div class="row">
                 <div class="ten columns">
                     <div class="reveal-text">
                         <span class="badge-outline" data-lang="since">Vuodesta 2021</span>
-                        <h1 class="hero-title-large">
-                            Fimarek <span class="accent-text" data-lang="hero_name">Oy</span>
+                        <h1 class="hero-title-large">Fimarek <span class="accent-text" data-lang="hero_name">Oy</span>
                         </h1>
-                        <p class="hero-lead" data-lang="hero-text">
-                            Vankkaa osaamista raudoituksesta betonitöihin – laadukkaat rakennuspalvelut Uudenmaan alueella.
-                        </p>
+                        <p class="hero-lead" data-lang="hero-text">Vankkaa osaamista raudoituksesta betonitöihin.</p>
                         <div class="hero-btns">
-                            <a href="connect.html" class="pure-button btn-main" data-lang="quote">Pyydä tarjous</a>
-                            <a href="#services" class="pure-button btn-ghost" data-lang="services">Palvelumme</a>
+                            <a href="connect.html" class="pure-button btn-main" data-lang="quote"
+                                aria-label="Request a quote">Pyydä tarjous</a>
+                            <a href="#services" class="pure-button btn-ghost" data-lang="services"
+                                aria-label="Our services">Palvelumme</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Индикатор скролла -->
-        <div class="scroll-down">
-            <div class="mouse"></div>
-            <span data-lang="scroll">Scroll</span>
         </div>
     </section>
 
@@ -65,14 +66,17 @@
                 <div class="six columns about-text-block">
                     <div class="line-decorator"></div>
                     <h2 class="h1-style" data-lang="about-title">Rakennusalan asiantuntija Uudenmaan alueella</h2>
-                    <p class="p-lead" data-lang="about-text1">Fimarek Oy on Vantaalla sijaitseva, luotettava ja kokenut rakennusalan yritys, joka palvelee asiakkaita ympäri Uuttamaata.</p>
+                    <p class="p-lead" data-lang="about-text1">Fimarek Oy on Vantaalla sijaitseva, luotettava ja kokenut
+                        rakennusalan yritys, joka palvelee asiakkaita ympäri Uuttamaata.</p>
                     <div class="industrial-quote">
-                        <p data-lang="about-text2">"Yrityksemme perusta on vankka osaaminen ja sitoutuminen korkeaan laatuun."</p>
+                        <p data-lang="about-text2">"Yrityksemme perusta on vankka osaaminen ja sitoutuminen korkeaan
+                            laatuun."</p>
                     </div>
                 </div>
                 <div class="six columns">
                     <div class="image-composite">
-                        <div class="main-image" style="background-image: url('images/20230928_121604.jpg');"></div>
+                        <div class="main-image" style="background-image: url('/materials/images/testimage.jpeg');">
+                        </div>
                         <div class="floating-experience">
                             <span class="exp-number">3+</span>
                             <span class="exp-text" data-lang="since-years">Vuotta kokemusta</span>
@@ -83,45 +87,78 @@
         </div>
     </section>
 
-    <!-- SECTION: SERVICES (Dark Industrial Grid) -->
-    <section class="section-padding bg-black" id="services">
+    <!-- SECTION: SERVICES (Industrial Engineering Grid) -->
+    <section class="section-padding bg-dark-industrial" id="services">
         <div class="container">
-            <div class="text-center section-header">
-                <h6 class="text-blue tracking-widest" data-lang="services">PALVELUT</h6>
-                <h2 class="white-text" data-lang="services-title">Mitä tarjoamme</h2>
+            <!-- Заголовок секции -->
+            <div class="row mb-60">
+                <div class="twelve columns text-center">
+                    <span class="blue-tag" data-lang="services">PALVELUT</span>
+                    <h2 class="section-heading white-text" data-lang="services-title">Mitä tarjoamme</h2>
+                    <div class="accent-line center"></div>
+                </div>
             </div>
-            
-            <div class="row services-v2">
+
+            <div class="row services-v3">
+                <!-- Card 01 -->
                 <div class="three columns">
-                    <div class="card-v2">
-                        <div class="card-num">01</div>
-                        <i class="fa-solid fa-layer-group"></i>
-                        <h4 data-lang="reinforcement">Raudoitus</h4>
-                        <p data-lang="desc-reinf">Luotettavat и kestävät raudoitustyöt kaikenkokoisiin projekteihin.</p>
+                    <div class="service-card-v3">
+                        <div class="card-header">
+                            <span class="card-number">01</span>
+                            <div class="icon-wrap"><i class="fa-solid fa-layer-group"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-lang="reinforcement">Raudoitus</h4>
+                            <p data-lang="desc-reinf">Luotettavat ja kestävät raudoitustyöt kaikenkokoisiin
+                                projekteihin.</p>
+                        </div>
+                        <div class="card-footer-line"></div>
                     </div>
                 </div>
+
+                <!-- Card 02 -->
                 <div class="three columns">
-                    <div class="card-v2">
-                        <div class="card-num">02</div>
-                        <i class="fa-solid fa-fill-drip"></i>
-                        <h4 data-lang="concrete">Betonityöt</h4>
-                        <p data-lang="desc-concrete">Ammattitaitoista betonointia uudisrakentamiseen и ремонттеihin.</p>
+                    <div class="service-card-v3">
+                        <div class="card-header">
+                            <span class="card-number">02</span>
+                            <div class="icon-wrap"><i class="fa-solid fa-fill-drip"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-lang="concrete">Betonityöt</h4>
+                            <p data-lang="desc-concrete">Ammattitaitoista betonointia uudisrakentamiseen и remontteihin.
+                            </p>
+                        </div>
+                        <div class="card-footer-line"></div>
                     </div>
                 </div>
+
+                <!-- Card 03 -->
                 <div class="three columns">
-                    <div class="card-v2">
-                        <div class="card-num">03</div>
-                        <i class="fa-solid fa-screwdriver-wrench"></i>
-                        <h4 data-lang="carpentry">Timpurityöt</h4>
-                        <p data-lang="desc-carpentry">Monipuoliset timpurityöt alusta loppuun – laadukkaasti.</p>
+                    <div class="service-card-v3">
+                        <div class="card-header">
+                            <span class="card-number">03</span>
+                            <div class="icon-wrap"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-lang="carpentry">Timpurityöt</h4>
+                            <p data-lang="desc-carpentry">Monipuoliset timpurityöt alusta loppuun – laadukkaasti.</p>
+                        </div>
+                        <div class="card-footer-line"></div>
                     </div>
                 </div>
+
+                <!-- Card 04 -->
                 <div class="three columns">
-                    <div class="card-v2">
-                        <div class="card-num">04</div>
-                        <i class="fa-solid fa-helmet-safety"></i>
-                        <h4 data-lang="general">Yleisrakennus</h4>
-                        <p data-lang="desc-general">Kattavat rakennuspalvelut pääkaupunkiseudulla.</p>
+                    <div class="service-card-v3">
+                        <div class="card-header">
+                            <span class="card-number">04</span>
+                            <div class="icon-wrap"><i class="fa-solid fa-helmet-safety"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-lang="general">Yleisrakennus</h4>
+                            <p data-lang="desc-general">Kattavat rakennuspalvelut pääkaupunkiseudulla.</p>
+                        </div>
+                        <div class="card-footer-line"></div>
                     </div>
                 </div>
             </div>
@@ -135,4 +172,5 @@
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
